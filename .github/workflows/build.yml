@@ -1,0 +1,32 @@
+name: Build
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install make and go
+      run: |
+        apt update
+        apt install make golang-go -y
+
+    - name: Lint
+      run: |
+        make lint
+
+    - name: Build anmd push
+      run: |
+        make push-github gh_token=${GITHUB_TOKEN}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
