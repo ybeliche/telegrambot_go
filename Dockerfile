@@ -18,6 +18,7 @@ FROM ${base_image}
 
 RUN apk add --no-cache ca-certificates
 
-COPY --from=builder /app/telegrambot /usr/local/bin/telegrambot
+ARG image_name
+COPY --from=builder /app/image_name /usr/local/bin/image_name
 
 CMD ["telegrambot"]
