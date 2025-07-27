@@ -16,10 +16,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Install make and go
-      run: |
-        apt update
-        apt install make golang-go -y
+    - name: Install go
+      uses: actions/install-go@v5
 
     - name: Lint
       run: |
