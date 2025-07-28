@@ -12,7 +12,6 @@ RUN go mod tidy
 
 ARG image_name
 RUN GOOS=linux GOARCH=amd64 go build -o ./${image_name} main.go
-RUN ls -la
 
 FROM ${base_image}
 
@@ -21,8 +20,8 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 ARG image_name
 COPY --from=builder /app/${image_name} /usr/local/bin/${image_name}
-RUN ls -la /usr/local/bin/
 RUN chown appuser:appgroup /usr/local/bin/${image_name}
+RUN ls -la
 
 USER appuser
 
