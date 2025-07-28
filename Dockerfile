@@ -11,7 +11,7 @@ COPY . .
 RUN go mod tidy
 
 ARG image_name
-RUN GOOS=linux GOARCH=amd64 go build -o ./${image_name} main.go
+RUN GOOS=linux GOARCH=amd64 go build -o ${image_name} main.go
 
 FROM ${base_image}
 
