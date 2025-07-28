@@ -21,4 +21,4 @@ RUN apk add --no-cache ca-certificates
 ARG image_name
 COPY --from=builder /app/${image_name} /usr/local/bin/${image_name}
 
-CMD ["/usr/local/bin/${image_name}"]
+CMD /usr/local/bin/${image_name}
