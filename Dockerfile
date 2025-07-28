@@ -21,7 +21,7 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 ARG image_name
 COPY --from=builder /app/${image_name} /usr/local/bin/${image_name}
 RUN chown appuser:appgroup /usr/local/bin/${image_name}
-RUN ls -la
+RUN ls -la /usr/local/bin/
 
 USER appuser
 
