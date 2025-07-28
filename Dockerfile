@@ -13,6 +13,7 @@ RUN go mod tidy
 ARG image_name
 RUN GOOS=linux GOARCH=amd64 go build -o ${image_name} main.go
 
+ARG base_image
 FROM ${base_image}
 
 RUN apk add --no-cache ca-certificates
