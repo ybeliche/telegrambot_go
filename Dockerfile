@@ -24,4 +24,4 @@ RUN chown appuser:appgroup /usr/local/bin/${image_name}
 
 USER appuser
 
-ENTRYPOINT ["/usr/local/bin/ybeliche_telegrambot"]
+ENTRYPOINT ["ybeliche_telegrambot"]
