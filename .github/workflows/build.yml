@@ -1,0 +1,30 @@
+name: Build
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install go
+      uses: actions/setup-go@v5
+
+    - name: Lint
+      run: |
+        make lint
+
+    - name: Build and push
+      run: |
+        make push-github gh_token=${GITHUB_TOKEN}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
