@@ -19,5 +19,8 @@ RUN apk add --no-cache ca-certificates
 
 ARG image_name
 COPY --from=builder /app/${image_name} /usr/local/bin/${image_name}
+RUN chown appuser:appgroup /usr/local/bin/${image_name}
+
+USER appuser
 
 ENTRYPOINT ["/usr/local/bin/ybeliche_telegrambot"]
