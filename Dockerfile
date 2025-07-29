@@ -1,5 +1,5 @@
 ARG image_name=ybeliche_telegrambot
-ARG build_image=golang:latest
+ARG build_image=golang:1.22
 ARG base_image=alpine:3.14
 
 FROM ${build_image} AS builder
@@ -13,10 +13,10 @@ RUN go mod tidy
 ARG image_name
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ${image_name} main.go
 
-ARG base_image
 FROM ${base_image}
 
 RUN apk add --no-cache ca-certificates
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 ARG image_name
 COPY --from=builder /app/${image_name} /usr/local/bin/${image_name}

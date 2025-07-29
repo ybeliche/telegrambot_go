@@ -20,7 +20,7 @@ build:
 
 .PHONY: docker-build
 docker-build:
-	docker build -t $(BINARY_NAME) $(PKG)
+	docker buildx build --platform linux/amd64 -t $(BINARY_NAME) $(PKG)
 
 .PHONY: login-github
 login-github:
