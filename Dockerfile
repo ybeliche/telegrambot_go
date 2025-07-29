@@ -11,7 +11,7 @@ COPY . .
 RUN go mod tidy
 
 ARG image_name
-RUN GOOS=linux GOARCH=amd64 go build -o image_name main.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ${image_name} main.go
 
 ARG base_image
 FROM ${base_image}
@@ -19,6 +19,6 @@ FROM ${base_image}
 RUN apk add --no-cache ca-certificates
 
 ARG image_name
-COPY --from=builder /app/image_name /usr/local/bin/image_name
+COPY --from=builder /app/${image_name} /usr/local/bin/${image_name}
 
-CMD ["telegrambot"]
+ENTRYPOINT ["/bin/sh","-c","ybeliche_telegrambot"]

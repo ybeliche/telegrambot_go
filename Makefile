@@ -16,7 +16,7 @@ all: build
 
 .PHONY: build
 build:
-	GOOS=linux GOARCH=amd64 go build -o $(BINARY_NAME) main.go
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o $(BINARY_NAME) main.go
 
 .PHONY: docker-build
 docker-build:
